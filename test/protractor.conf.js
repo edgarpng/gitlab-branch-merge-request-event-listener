@@ -6,10 +6,10 @@ exports.config = {
   ],
 
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'Firefox'
   },
 
-  chromeOnly: true,
+  chromeOnly: false,
 
   baseUrl: 'http://localhost:8000/',
 

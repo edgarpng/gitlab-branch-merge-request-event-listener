@@ -11,11 +11,15 @@ var gbeApp = angular.module('gbeApp', [
 gbeApp.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.
-        when('/branches', {
-            templateUrl: 'partials/branches.html',
+        when('/open_merge_requests', {
+            templateUrl: 'partials/open_merge_requests.html',
             controller: 'gbeListCtrl'
         }).
+        when('/login', {
+            templateUrl: 'partials/login.html',
+            controller: 'gbeLoginCtrl'
+        }).
         otherwise({
-            redirectTo: '/branches'
+            redirectTo: '/login'
         });
     }]);

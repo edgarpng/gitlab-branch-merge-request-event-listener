@@ -18,7 +18,6 @@ gbeServices.factory('Gitlab', ['$http',
         };
 
         gitlabService.login = function(server, username, password) {
-            //var url = 'https://gitlab.corp.ezrez/api/v3/projects/73/merge_requests?state=opened&private_token=YeeLUHzskpsyjvzYufMo';
             var url = server + '/api/v3/session/';
             var data = {};
             data.login = username;

@@ -8,15 +8,6 @@ gbeServices.factory('Gitlab', ['$http',
     function($http) {
         var gitlabService = {};
 
-        gitlabService.list_merge_requests = function() {
-            var url = 'https://gitlab.corp.ezrez/api/v3/projects/73/merge_requests?state=opened&private_token=' + gitlabService.private_token;
-            var promise = $http.get(url).then(function (response) {
-                console.log(response);
-                return response.data;
-            });
-            return promise;
-        };
-
         gitlabService.login = function(server, username, password) {
             var url = server + '/api/v3/session/';
             var data = {};
@@ -26,6 +17,16 @@ gbeServices.factory('Gitlab', ['$http',
             var promise = $http.post(url, data).then(function (response) {
                 console.log(response);
                 gitlabService.private_token = data.private_token;
+                return response.data;
+            });
+            return promise;
+        };
+
+        gitlabService.list_merge_requests = function() {
+            var url = 'https://gitlab.corp.ezrez/api/v3/projects/73/merge_requests?state=opened&private_token=' + gitlabService.private_token;
+
+            var promise = $http.get(url).then(function (response) {
+                console.log(response);
                 return response.data;
             });
             return promise;

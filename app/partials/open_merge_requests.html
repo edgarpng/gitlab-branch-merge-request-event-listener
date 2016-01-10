@@ -8,19 +8,32 @@
 
         </div>
         <div class="col-md-10">
-            <!--Body content-->
 
-            <ul>
-                <li ng-repeat="mr in mrs | filter:assigned_user">
-                    {{mr}}
 
+            <div ng-repeat="mr in mrs | filter:assigned_user" class="panel panel-info">
+
+
+                <div class="panel-heading">
+                    <h3 class="panel-title"><a href="https://gitlab.corp.ezrez/switchfly/dev/merge_requests/{{mr.iid}}" target="_blank">{{'#' + mr.iid + ' ' + mr.title}}</a></h3>
+                </div>
+                <div class="panel-body">
+                    <dl>
+                        <dt>Branch source/target:</dt>
+                        <dd>{{mr.source_branch}} <span class="glyphicon glyphicon-arrow-right"></span> {{mr.target_branch}}</dd>
+                        <dt>Author/Assignee:</dt>
+                        <dd>
+                            {{mr.author.username}} <img ng-src="{{mr.author.avatar_url}}" class="avatar"/> <span class="glyphicon glyphicon-arrow-right"></span>
+                            {{mr.assignee.username}} <img ng-src="{{mr.assignee.avatar_url}}" class="avatar"/>
+                        </dd>
+                        <dt>Description:</dt>
+                        <dd>{{mr.description}}</dd>
+                    </dl>
+                    <a href="" ng-click="load_comments('mr_comments_' + mr.id, mr.id)">show comments</a>
                     <div id="{{'mr_comments_' + mr.id}}">
-
+                        Loading comments...
                     </div>
-                    <a id="link-4" href="" name="xx" ng-click="load_comments('mr_comments_' + mr.id, mr.id)">show comments</a>
-                </li>
-            </ul>
-
+                </div>
+            </div>
         </div>
     </div>
 </div>

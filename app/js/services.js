@@ -7,17 +7,16 @@ var gbeServices = angular.module('gbeServices', ['ngResource']);
 gbeServices.factory('Gitlab', ['$http',
     function($http) {
         var gitlabService = {};
-        gitlabService.server='https://gitlab.corp.ezrez';
+        gitlabService.host='https://gitlab.corp.ezrez';
 
 
 
 
-        gitlabService.login = function(server, username, password) {
-            var url = server + '/api/v3/session/';
+        gitlabService.login = function(host, username, password) {
+            var url = host + '/api/v3/session/';
             var data = {};
             data.login = username;
             data.password = password;
-            console.log("calling " + url + " with " + JSON.stringify(data));
 
             return $http.post(url, data).then(function (response) {
                 console.log(response);
@@ -27,21 +26,23 @@ gbeServices.factory('Gitlab', ['$http',
         };
 
 
+        //https://gitlab.corp.ezrez/switchfly/dev/merge_requests?assignee_id=168&label_name=&milestone_id=&scope=all&sort=newest&state=opened
         gitlabService.list_merge_requests = function() {
-            var url = gitlabService.server + '/api/v3/projects/73/merge_requests?state=opened&private_token=' + gitlabService.private_token;
+            var url = gitlabService.host + '/api/v3/projects/73/merge_requests?state=opened&private_token=' + gitlabService.private_token;
 
             return $http.get(url).then(function (response) {
-                console.log(response);
+                console.log(response.data); //TODO remove
+                console.log(JSON.stringify(response.data)); //TODO remove
                 return response.data;
             });
         };
 
         gitlabService.get_merge_requests_comments = function(merge_request_id) {
             console.log(merge_request_id);
-            var url = gitlabService.server + '/api/v3/projects/73/merge_request/' + merge_request_id + '/comments?private_token=' + gitlabService.private_token;
+            var url = gitlabService.host + '/api/v3/projects/73/merge_request/' + merge_request_id + '/comments?private_token=' + gitlabService.private_token;
 
             return $http.get(url).then(function (response) {
-                console.log(response);
+                console.log(response); //TODO remove
                 return response.data;
             });
         };

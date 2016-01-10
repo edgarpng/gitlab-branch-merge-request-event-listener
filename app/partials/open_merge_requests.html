@@ -1,14 +1,23 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2">
+            <!--Sidebar content-->
+
+            Assigned user: <input ng-model="assigned_user">
+
 
         </div>
         <div class="col-md-10">
             <!--Body content-->
 
             <ul>
-                <li ng-repeat="mr in mrs">
-                    {{mr.title}}
+                <li ng-repeat="mr in mrs | filter:assigned_user">
+                    {{mr}}
+
+                    <div id="{{'mr_comments_' + mr.id}}">
+
+                    </div>
+                    <a id="link-4" href="" name="xx" ng-click="load_comments('mr_comments_' + mr.id, mr.id)">show comments</a>
                 </li>
             </ul>
 

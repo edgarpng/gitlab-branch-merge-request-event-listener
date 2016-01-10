@@ -10,6 +10,14 @@ gbeControllers.controller('gbeListCtrl', ['$scope', 'Gitlab', 'Storage',
             $scope.mrs = d;
         });
 
+
+        $scope.load_comments = function(targetId, merge_request_id) {
+            Gitlab.get_merge_requests_comments(merge_request_id).then(function(d) {
+                angular.element(document.querySelector('#' + targetId)).html(JSON.stringify(d));
+            });
+        };
+
+
     }]);
 
 gbeControllers.controller('gbeLoginCtrl', ['$scope', '$window', 'Gitlab', 'Storage',
